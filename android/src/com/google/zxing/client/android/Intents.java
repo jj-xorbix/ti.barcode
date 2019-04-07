@@ -37,6 +37,7 @@ public final class Intents {
     public static final String USE_FRONT_CAMERA = "USE_FRONT_CAMERA";
     public static final String SHOW_RECTANGLE = "SHOW_RECTANGLE";
     public static final String KEEP_OPEN = "KEEP_OPEN";
+    public static final String SCANNING_ENABLED = "SCANNING_ENABLED";
     public static final String ALLOW_MENU = "ALLOW_MENU";
     public static final String ALLOW_INSTRUCTIONS = "ALLOW_INSTRUCTIONS";
     public static final String SHOW_INFO_TEXT = "SHOW_INFO_TEXT";

@@ -57,6 +57,7 @@ public class BarcodeModule extends KrollModule implements TiActivityResultHandle
 	// Standard Debugging variables
 	private static final String LCAT = "BarcodeModule";
 	private boolean keepOpen = false;
+	private boolean scanningEnabled = false;
 
 	public int frameWidth = 0;
 	public int frameHeight = 0;
@@ -155,6 +156,21 @@ public class BarcodeModule extends KrollModule implements TiActivityResultHandle
 		new CameraConfigurationManager(getActivity()).setTorch(null, value);
 		if (CaptureActivity.getInstance() != null) {
 			CaptureActivity.getInstance().getCameraManager().setTorch(value);
+		}
+	}
+
+	@Kroll.method
+	@Kroll.getProperty
+	public boolean getScanningEnabled() {
+		return CaptureActivity.getInstance().isScanningEnabled();
+	}
+
+	@Kroll.method
+	@Kroll.setProperty
+	public void setScanningEnabled(boolean value) {
+		scanningEnabled = value;
+		if (CaptureActivity.getInstance() != null) {
+			CaptureActivity.getInstance().setScanningEnabled(scanningEnabled);
 		}
 	}
 
@@ -296,6 +312,7 @@ public class BarcodeModule extends KrollModule implements TiActivityResultHandle
 
 			intent.putExtra(Intents.Scan.SHOW_RECTANGLE, argsDict.optBoolean("showRectangle", true));
 			intent.putExtra(Intents.Scan.KEEP_OPEN, argsDict.optBoolean("keepOpen", false));
+			intent.putExtra(Intents.Scan.SCANNING_ENABLED, argsDict.optBoolean("scanningEnabled", false));
 			frameWidth = argsDict.optInt("frameWidth", 0);
 			frameHeight = argsDict.optInt("frameHeight",0);
 			intent.putExtra(Intents.Scan.SHOW_INFO_TEXT, argsDict.optBoolean("showInfoText", false));

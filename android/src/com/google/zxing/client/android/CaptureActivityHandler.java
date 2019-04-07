@@ -81,6 +81,10 @@ public final class CaptureActivityHandler extends Handler {
   public void handleMessage(Message message) {
     if (message.what==RHelper.getId("restart_preview")) {
         restartPreviewAndDecode();
+    } else if (!activity.isScanningEnabled()) {
+        // Scanning has not been enabled by a tap yet so don't do anything, just keep previewing
+        state = State.PREVIEW;
+        cameraManager.requestPreviewFrame(decodeThread.getHandler(), RHelper.getId("decode"));
     } else if(message.what== RHelper.getId("decode_succeeded")) {
         state = State.SUCCESS;
         Bundle bundle = message.getData();

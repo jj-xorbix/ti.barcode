@@ -114,6 +114,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
   private boolean allowMenu;
   private boolean keepOpen;
+  private boolean scanningEnabled;
   private boolean showRectangle;
 
   private AmbientLightManager ambientLightManager;
@@ -130,6 +131,14 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
   public boolean doKeepOpen() {
     return keepOpen;
+  }
+
+  public boolean isScanningEnabled() {
+    return scanningEnabled;
+  }
+
+  public void setScanningEnabled(boolean enabledFlag) {
+    scanningEnabled = enabledFlag;
   }
 
   public static CaptureActivity getInstance() {
@@ -273,6 +282,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 		}
 
 		keepOpen = intent.getBooleanExtra(Intents.Scan.KEEP_OPEN, false);
+    scanningEnabled = intent.getBooleanExtra(Intents.Scan.SCANNING_ENABLED, false);
 
         if (intent.hasExtra(Intents.Scan.CAMERA_ID)) {
           int cameraId = intent.getIntExtra(Intents.Scan.CAMERA_ID, -1);
